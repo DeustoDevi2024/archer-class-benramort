@@ -35,7 +35,13 @@ namespace Archer
 
         private void Update()
         {
-  
+            //transform.LookAt(target.position + offset);
+            transform.position = target.position + offset + (-distance * target.forward); //Falta angle
+            //transform.RotateAround(target.position, Vector3.right, angle);
+            transform.LookAt(target.position + offset);
+            //Vector3 desiredPosition = target.position + offset(-distance * transform.forward);
+            
+            
         }
 
     }
