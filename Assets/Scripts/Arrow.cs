@@ -7,12 +7,14 @@ namespace Archer
     {
 
         private Rigidbody arrowRigidbody;
+        private AudioSource audioSource;
         private bool hit;
 
         private void Awake()
         {
             // Establecer las referencias de Rigidbody (para detener la flecha) y AudioSource (para el sonido de impacto)
             arrowRigidbody = GetComponent<Rigidbody>();
+            audioSource = GetComponent<AudioSource>();
            
         }
 
@@ -46,6 +48,7 @@ namespace Archer
             {
                 enemy.Hit();
             }
+            audioSource.Play();
           
         }
 

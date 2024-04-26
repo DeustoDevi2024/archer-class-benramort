@@ -32,6 +32,7 @@ namespace Archer
       
 
         private Animator animator;
+        private AudioSource audioSource;
 
         private void Awake()
         {
@@ -39,6 +40,7 @@ namespace Archer
             // Nos subscribimos al evento de input de disparo (el espacio o el botón A).
             fireInputReference.action.performed += Action_performed;
             animator = GetComponent<Animator>();
+            audioSource = GetComponent<AudioSource>();
         }
 
         private void Action_performed(InputAction.CallbackContext obj)
@@ -49,7 +51,8 @@ namespace Archer
 
         private IEnumerator Shoot()
         {
-          
+
+            animator.SetTrigger("Shoot");
 
             yield return new WaitForSeconds(0.3f);
 
@@ -59,6 +62,7 @@ namespace Archer
             Vector3 launchVector = transform.forward;
             launchVector.y += verticalOffset;
             launchVector *= force;
+            audioSource.Play();
 
             //Debug.Log(launchVector);
             arrow.GetComponent<Rigidbody>().AddForce(launchVector);

@@ -17,17 +17,21 @@ namespace Archer
         private GameObject ligth;
 
         private Animator animator;
+        private AudioSource audioSource;
 
         public event IScoreProvider.ScoreAddedHandler OnScoreAdded;
 
         private void Awake()
         {
             animator = GetComponent<Animator>();
+            audioSource = GetComponent<AudioSource>();
         }
 
         // Método que se llamará cuando el enemigo reciba un impacto
         public void Hit()
         {
+            audioSource.Play();
+            animator.SetTrigger("Hit");
             Debug.Log("L¡Hit");
             hitPoints--;
             if (hitPoints <= 0 )
@@ -43,6 +47,7 @@ namespace Archer
 
         IEnumerator DieCoroutine()
         {
+            animator.SetTrigger("Die");
             ligth.SetActive(true);
             yield return new WaitForSeconds(3);
             ligth.SetActive(false);
